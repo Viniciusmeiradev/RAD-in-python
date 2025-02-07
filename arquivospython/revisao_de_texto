@@ -1,0 +1,34 @@
+import os
+
+def main():
+    print("Digite seu texto aqui. Para terminar e salvar, digite sair.")
+    texto = []
+    while True:
+        entrada = input("Digite Seu Texto: ")
+        if entrada.lower() == "sair":
+            break
+        texto.append(entrada)   #Adicionando os textos na lista
+
+    #Escrevendo os dados no arquivo
+    with open("arquivo.txt", "w", encoding = "utf-8") as arquivos:
+        for linha in texto:
+            arquivos.write(linha + "\n")
+    
+    #Manipulação de dados
+    texto_modificado = []
+    with open("arquivo.txt", "r", encoding = "utf-8") as arquivos:
+        for linha in arquivos:
+            texto_modificado.append(linha.strip().upper())  #Converter para maiuscula.
+
+    #Sobrescrita dos dados
+    with open("arquivo.txt", "w", encoding = "utf-8") as arquivos:
+        for linha in texto_modificado:
+            arquivos.write(linha + "\n")
+    print("O arquivo foi sobrescrito com os dados modificados.")
+
+if __name__=="__main__":
+    main()
+
+#Encontrar a localização do seu arquivo
+absolute = os.path.abspath("arquivo.txt")
+print("Foi salvo e estar localizado em: ", absolute)
