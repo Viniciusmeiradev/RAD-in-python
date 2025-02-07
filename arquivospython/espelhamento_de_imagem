@@ -1,0 +1,44 @@
+from PIL import image
+import numpy as np
+
+def main():
+    #Carregar imagem original
+    img = image.open("fotopaga.jpg")
+    #img.show()
+
+    #Converter a imagem em dados binários
+    img_bits = np.array(img)
+    dados_binarios = img_bits.tobytes()
+
+    #Dimensão da imagem (altura, largura e profundidade)
+    print("\n", img_bits.shape, "\n")
+
+    #Salvar os dados binários em um arquivo
+    with open("imagem_original.bin", "wb") as file:
+        file.write(dados_binarios)
+
+    #Fazer uma cópia do arquivo binário
+    with open ("imagem_original.bin","rb") as arquivo_original:
+        dados = arquivo_original.read()
+    with open("imagem_copia.bin", "wb") as copia_file:
+        copia_file.write(dados)
+
+    #Manipulação do arquivo cópia, fazer a inversão da imagem.
+    with open("imagem_copia.bin", "rb") as file:
+        dados = bytearray(file.read())
+
+    #inverter os bits
+    #comando para deixar a imagem de cabeça para baixo (dados = dados[::-1])
+    with open("imagem_copia.bin", "wb") as file:
+        file.write(dados)
+
+    #Carregar e mostrar a imagem manipulada
+    dados_modificados = np.frombuffer(dados, dtype=np.uint8).reshape(img_bits.shape)
+
+    #Inverte todos os bytes
+    dados_modificados = np.fliplr(dados_modificados)
+    img_modificada = Image.fromarray(dados_modificados)
+    img_modificada.show()
+
+if __name__=="__main__":
+    main()
