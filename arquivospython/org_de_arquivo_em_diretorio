@@ -27,8 +27,8 @@ def processar_arquivo(arquivo_origem, arquivo_destino):
 
 def main():
     diretorio_trabalho = 'diretorio_trabalho'                                       #Diretorio principal
-    diretorio_origem = os.path.join(diretorio_trabalho, 'arquivo_origem.txt')
-    diretorio_destino = os.path.join(diretorio_trabalho, 'arquivo_destino.txt')
+    arquivo_origem = os.path.join(diretorio_trabalho, 'arquivo_origem.txt')
+    arquivo_destino = os.path.join(diretorio_trabalho, 'arquivo_destino.txt')
     processar_arquivo(arquivo_origem, arquivo_destino)                              #Executa a funcao de processamento
 
 if __name__=="__main__":
